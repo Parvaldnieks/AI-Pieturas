@@ -18,8 +18,7 @@
         type="text" 
         x-model="search"
         placeholder="Search history..."
-        class="border border-gray-300 rounded px-3 py-2 w-full mb-4 focus:border-blue-500 focus:ring-blue-500"
-        >
+        class="border border-gray-300 rounded px-3 py-2 w-full mb-4 focus:border-blue-500 focus:ring-blue-500">
 
     <table class="w-full border-collapse text-center">
         <thead>
