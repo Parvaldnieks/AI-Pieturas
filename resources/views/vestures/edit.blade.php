@@ -18,7 +18,13 @@
 
                 <div>
                     <label class="block text-gray-700 dark:text-gray-300">{{ __('Laiks') }}</label>
-                    <input type="number" id="time" name="time" class="block mt-1 w-full rounded-md border-gray-200 dark:border-gray-600 dark:bg-gray-800 focus:border-purple-500 dark:focus:border-purple-500 focus:outline-none focus:ring-0 sm:text-sm" value="{{ old('name', $vesture->time) }}">
+                    <input 
+                        type="datetime-local" 
+                        id="time" 
+                        name="time" 
+                        class="block mt-1 w-full rounded-md border-gray-200 dark:border-gray-600 dark:bg-gray-800 focus:border-purple-500 focus:outline-none focus:ring-0 sm:text-sm" 
+                        value="{{ old('time', $vesture->formatted_time ?? '') }}"
+                    >
                 </div>
 
                 <div class="mt-6">
@@ -52,4 +58,3 @@
         </form>
     </div>
 </x-app-layout>
-

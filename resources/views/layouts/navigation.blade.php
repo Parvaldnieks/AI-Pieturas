@@ -88,6 +88,18 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('pieturas.index')" :active="request()->routeIs('pieturas')">
+                {{ __('Pieturas') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('vestures.index')" :active="request()->routeIs('vestures')">
+                {{ __('Vēsture') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('mp3.index')" :active="request()->routeIs('mp3')">
+                {{ __('MP3') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

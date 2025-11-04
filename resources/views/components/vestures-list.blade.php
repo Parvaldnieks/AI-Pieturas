@@ -3,23 +3,40 @@
 <div 
     x-data="{ 
         search: '', 
+        selectedDate: '',
         vestures: {{ $vestures->toJson() }},
+
         get filtered() {
-            if (this.search === '') return this.vestures;
-            return this.vestures.filter(v => 
-                v.text.toLowerCase().includes(this.search.toLowerCase())
-            );
+            return this.vestures.filter(v => {
+                const matchesSearch = v.text.toLowerCase().includes(this.search.toLowerCase());
+
+                if (!this.selectedDate) return matchesSearch;
+                const formattedDate = new Date(v.time * 1000)
+                    .toISOString()
+                    .slice(0, 10);
+
+                return matchesSearch && formattedDate === this.selectedDate;
+            });
         }
     }" 
     class="p-6"
 >
 
-    <input 
-        type="text" 
-        x-model="search"
-        placeholder="Meklē vēsturi..."
-        class="border border-gray-300 rounded px-3 py-2 w-full mb-4 focus:border-blue-500 focus:ring-blue-500"
-    >
+    <div class="max-w-md mx-auto flex flex-col sm:flex-row sm:space-x-4">
+        <input 
+            type="text" 
+            x-model="search"
+            placeholder="Meklēt vēsturi..."
+            class="border border-gray-300 rounded px-3 py-2 mb-4 w-full focus:border-blue-500 focus:ring-blue-500"
+        >
+
+        <input 
+            type="date" 
+            id="date" 
+            x-model="selectedDate"
+            class="border border-gray-300 rounded px-3 py-2 mb-4 w-full focus:border-blue-500 focus:ring-blue-500"
+        />
+    </div>
 
     <table class="w-full border-collapse text-center">
         <thead>
@@ -41,7 +58,6 @@
 
             <template x-for="vesture in filtered" :key="vesture.id">
                 <tr>
-                    {{-- MP3 file link --}}
                     <td class="px-6 py-4 border-b border-gray-200">
                         <template x-if="vesture.mp3_path">
                             <a 

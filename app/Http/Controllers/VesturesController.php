@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Vesture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,6 +19,8 @@ class VesturesController extends Controller
     public function edit($id)
     {
         $vesture = vesture::findOrFail($id);
+        $vesture->formatted_time = Carbon::createFromTimestamp($vesture->time, 'Europe/Riga')->format('Y-m-d\TH:i');
+
         return view('vestures.edit', compact('vesture'));
     }
 
@@ -38,8 +41,10 @@ class VesturesController extends Controller
 
         $vesture = Vesture::findOrFail($id);
 
+        $timestamp = Carbon::parse($data['time'], 'Europe/Riga')->timestamp;
+
         $vesture->text = $data['text'];
-        $vesture->time = $data['time'];
+        $vesture->time = $timestamp;
 
         if ($request->hasFile('file')) {
             if ($vesture->mp3_path) {
