@@ -17,15 +17,16 @@
     <input 
         type="text" 
         x-model="search"
-        placeholder="Search history..."
+        placeholder="Meklē vēsturi..."
         class="border border-gray-300 rounded px-3 py-2 w-full mb-4 focus:border-blue-500 focus:ring-blue-500"
-        >
+    >
 
     <table class="w-full border-collapse text-center">
         <thead>
             <tr>
-                <th class="border-b border-gray-200">{{ __('Teksts') }}</th>
-                <th class="border-b border-gray-200">{{ __('Darbības') }}</th>
+                <th class="border-b border-gray-200 py-2">{{ __('MP3 Fails') }}</th>
+                <th class="border-b border-gray-200 py-2">{{ __('Teksts') }}</th>
+                <th class="border-b border-gray-200 py-2">{{ __('Darbības') }}</th>
             </tr>
         </thead>
 
@@ -33,13 +34,29 @@
             <template x-if="filtered.length === 0">
                 <tr>
                     <td colspan="3" class="text-gray-500 italic text-center py-4">
-                        No results found.
+                        Nekas netika atrasts.
                     </td>
                 </tr>
             </template>
 
             <template x-for="vesture in filtered" :key="vesture.id">
                 <tr>
+                    {{-- MP3 file link --}}
+                    <td class="px-6 py-4 border-b border-gray-200">
+                        <template x-if="vesture.mp3_path">
+                            <a 
+                                :href="`/vestures/${vesture.id}`" 
+                                class="text-blue-500 hover:text-blue-700 hover:underline"
+                            >
+                                MP3 Fails
+                            </a>
+                        </template>
+
+                        <template x-if="!vesture.mp3_path">
+                            <span class="text-gray-400 italic">Nav pievienots</span>
+                        </template>
+                    </td>
+                    
                     <td class="px-6 py-4 border-b border-gray-200">
                         <a 
                             :href="`/vestures/${vesture.id}/edit`"
@@ -53,11 +70,10 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:text-red-700 hover:underline">
-                                Delete
+                                Dzēst
                             </button>
                         </form>
                     </td>
-
                 </tr>
             </template>
         </tbody>

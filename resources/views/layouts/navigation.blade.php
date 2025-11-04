@@ -18,12 +18,6 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('mp3.index')" :active="request()->routeIs('mp3')">
-                        {{ __('MP3') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('pieturas.index')" :active="request()->routeIs('pieturas')">
                         {{ __('Pieturas') }}
                     </x-nav-link>
@@ -32,6 +26,12 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('vestures.index')" :active="request()->routeIs('vestures')">
                         {{ __('Vēsture') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('mp3.index')" :active="request()->routeIs('mp3')">
+                        {{ __('MP3') }}
                     </x-nav-link>
                 </div>
             </div>

@@ -1,3 +1,5 @@
+@props(['pieturas'])
+
 <div 
     x-data="{ 
         search: '', 
@@ -16,7 +18,7 @@
     <input 
         type="text" 
         x-model="search"
-        placeholder="Search pieturas..."
+        placeholder="Meklēt pieturas..."
         class="border border-gray-300 rounded px-3 py-2 w-full mb-4 focus:border-blue-500 focus:ring-blue-500"
     >
 
@@ -33,7 +35,7 @@
             <template x-if="filtered.length === 0">
                 <tr>
                     <td colspan="3" class="text-gray-500 italic text-center py-4">
-                        No results found.
+                        Nekas netika atrasts.
                     </td>
                 </tr>
             </template>
@@ -51,11 +53,11 @@
                     <td class="px-6 py-4 border-b border-gray-200" x-text="pietura.text"></td>
 
                     <td class="px-6 py-4 border-b border-gray-200">
-                        <form :action="`/pieturas/${pietura.id}`" method="POST" class="inline-block">
+                        <form :action="`/pieturas/${pietura.id}`" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:text-red-700 hover:underline">
-                                Delete
+                                Dzēst
                             </button>
                         </form>
                     </td>

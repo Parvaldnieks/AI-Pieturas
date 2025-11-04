@@ -12,7 +12,7 @@ class Vesture extends Model
     protected $fillable = [
         'time',
         'text',
-        //'file_name',
+        'mp3_path',
         'pieturas_id',
     ];
 

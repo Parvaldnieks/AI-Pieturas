@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vesture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class VesturesController extends Controller
 {
@@ -20,15 +21,36 @@ class VesturesController extends Controller
         return view('vestures.edit', compact('vesture'));
     }
 
+    public function show($id)
+    {
+        $vesture = vesture::findOrFail($id);
+
+        return view('vestures.show', compact('vesture'));
+    }
+
     public function update(Request $request, $id)
     {
         $data = $request->validate([
             'text' => ['required', 'max:255'],
             'time' => ['required'],
+            'file' => ['nullable', 'file', 'mimes:mp3', 'max:20480'],
         ]);
 
-        $vesture = vesture::findOrFail($id);
-        $vesture->update($data);
+        $vesture = Vesture::findOrFail($id);
+
+        $vesture->text = $data['text'];
+        $vesture->time = $data['time'];
+
+        if ($request->hasFile('file')) {
+            if ($vesture->mp3_path) {
+                Storage::disk('public')->delete($vesture->mp3_path);
+            }
+
+            $path = $request->file('file')->store('mp3s', 'public');
+            $vesture->mp3_path = $path;
+        }
+
+        $vesture->save();
 
         return redirect()->route('vestures.index');
     }

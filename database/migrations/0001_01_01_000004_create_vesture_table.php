@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('vesture', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pieturas_id')->constrained('pieturas')->onDelete('cascade');
-            //$table->string('name');
+            $table->string('mp3_path')->nullable()->default(null);
             $table->string('text');
             $table->unsignedBigInteger('time')->nullable()->default(null);
             $table->timestamps();
