@@ -11,7 +11,7 @@ class VesturesController extends Controller
 {
     public function index()
     {
-        $vestures = vesture::all();
+        $vestures = vesture::orderByDesc('created_at')->get();
 
         return view('vestures.index', compact('vestures'));
     }
@@ -34,15 +34,25 @@ class VesturesController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
+            'name' => ['required', 'max:50'],
             'text' => ['required', 'max:255'],
             'time' => ['required'],
             'file' => ['nullable', 'file', 'mimes:mp3', 'max:20480'],
+        ], [
+            'name.required' => __('Nosaukums ir nepieciešams!'),
+            'name.max' => __('Nosaukums nedrīkst pārsniegt 50 rakstzīmes!'),
+            'text.required' => __('Teksts ir nepieciešams!'),
+            'text.max' => __('Teksts nedrīkst pārsniegt 255 rakstzīmes!'),
+            'time.required' => __('Laiks ir nepieciešams!'),
+            'file.mimes' => __('Faila formāts ir nepareizs!'),
+            'file.max' => __('Fails nedrīkst pārsniegt 20MB!'),
         ]);
 
         $vesture = Vesture::findOrFail($id);
 
         $timestamp = Carbon::parse($data['time'], 'Europe/Riga')->timestamp;
 
+        $vesture->name = $data['name'];
         $vesture->text = $data['text'];
         $vesture->time = $timestamp;
 

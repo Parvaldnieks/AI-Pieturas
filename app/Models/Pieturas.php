@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Vesture;
+use App\Services\TextToSpeechService;
+use Illuminate\Database\Eloquent\Model;
 
 class Pieturas extends Model
 {
@@ -22,16 +23,22 @@ class Pieturas extends Model
         parent::boot();
 
         static::created(function ($pietura) {
+            $tts = new TextToSpeechService();
+            $mp3Path = $tts->generateMp3($pietura->name, $pietura->text);
+
             Vesture::create([
                 'pieturas_id' => $pietura->id,
+                'name' => $pietura->name,
                 'text' => $pietura->text,
                 'time' => time(), // Unix laiks
+                'mp3_path' => $mp3Path,
             ]);
         });
 
         static::updated(function ($pietura) {
             Vesture::create([
                 'pieturas_id' => $pietura->id,
+                'name' => $pietura->name,
                 'text' => $pietura->text,
                 'time' => time(), // Unix laiks
             ]);

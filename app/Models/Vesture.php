@@ -10,10 +10,11 @@ class Vesture extends Model
     protected $table = 'vesture';
 
     protected $fillable = [
-        'time',
-        'text',
-        'mp3_path',
         'pieturas_id',
+        'mp3_path',
+        'name',
+        'text',
+        'time',
     ];
 
     public function pietura()

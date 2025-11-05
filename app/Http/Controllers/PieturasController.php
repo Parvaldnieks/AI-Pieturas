@@ -9,9 +9,15 @@ class PieturasController extends Controller
 {
     public function index()
     {
-        $pieturas = Pieturas::all();
+        $pieturas = Pieturas::orderByDesc('created_at')->get();
 
         return view('pieturas.index', compact('pieturas'));
+    }
+
+    public function show($id)
+    {
+        $pietura = Pieturas::findOrFail($id);
+        return view('pieturas.show', compact('pietura'));
     }
 
     public function create()
@@ -23,7 +29,13 @@ class PieturasController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'max:50'],
-            'text' => ['required', 'max:255'],
+            'text' => ['required', 'max:255', 'regex:/^[a-zA-ZāčēģīķļņšūžĀČĒĢĪĶĻŅŠŪŽ\s!?,.]+$/u'],
+        ], [
+            'name.required' => __('Nosaukums ir nepieciešams!'),
+            'name.max' => __('Nosaukums nedrīkst pārsniegt 50 rakstzīmes!'),
+            'text.required' => __('Teksts ir nepieciešams!'),
+            'text.max' => __('Teksts nedrīkst pārsniegt 255 rakstzīmes!'),
+            'text.regex' => __('Teksts nedrīkst saturēt ciparus!'),
         ]);
 
         Pieturas::create($data);
@@ -41,7 +53,13 @@ class PieturasController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'max:50'],
-            'text' => ['required', 'max:255'],
+            'text' => ['required', 'max:255', 'regex:/^[a-zA-ZāčēģīķļņšūžĀČĒĢĪĶĻŅŠŪŽ\s!?,.]+$/u'],
+        ], [
+            'name.required' => __('Nosaukums ir nepieciešams!'),
+            'name.max' => __('Nosaukums nedrīkst pārsniegt 50 rakstzīmes!'),
+            'text.required' => __('Teksts ir nepieciešams!'),
+            'text.max' => __('Teksts nedrīkst pārsniegt 255 rakstzīmes!'),
+            'text.regex' => __('Teksts nedrīkst saturēt ciparus!'),
         ]);
 
         $pietura = Pieturas::findOrFail($id);

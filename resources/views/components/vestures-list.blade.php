@@ -76,7 +76,7 @@
                     <td class="px-6 py-4 border-b border-gray-200">
                         <a 
                             :href="`/vestures/${vesture.id}/edit`"
-                            class="text-blue-500 hover:text-blue-700 hover:underline"
+                            class="text-yellow-500 hover:text-yellow-700 hover:underline"
                             x-text="vesture.text"
                         ></a>
                     </td>

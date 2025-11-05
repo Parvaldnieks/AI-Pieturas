@@ -42,26 +42,42 @@
 
             <template x-for="pietura in filtered" :key="pietura.id">
                 <tr>
+                    {{-- Nosaukums → SHOW --}}
                     <td class="px-6 py-4 border-b border-gray-200">
                         <a 
-                            :href="`/pieturas/${pietura.id}/edit`"
+                            :href="`/pieturas/${pietura.id}`"
                             class="text-blue-500 hover:text-blue-700 hover:underline"
                             x-text="pietura.name"
                         ></a>
                     </td>
 
+                    {{-- Teksts --}}
                     <td class="px-6 py-4 border-b border-gray-200" x-text="pietura.text"></td>
 
-                    <td class="px-6 py-4 border-b border-gray-200">
-                        <form :action="`/pieturas/${pietura.id}`" method="POST">
+                    {{-- Darbības: Edit + Delete --}}
+                    <td class="px-6 py-4 border-b border-gray-200 space-x-3">
+                        <a 
+                            :href="`/pieturas/${pietura.id}/edit`"
+                            class="text-yellow-500 hover:text-yellow-700 hover:underline"
+                        >
+                            Rediģēt
+                        </a>
+
+                        <form 
+                            :action="`/pieturas/${pietura.id}`" 
+                            method="POST" 
+                            class="inline-block"
+                        >
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:text-red-700 hover:underline">
+                            <button 
+                                type="submit" 
+                                class="text-red-500 hover:text-red-700 hover:underline"
+                            >
                                 Dzēst
                             </button>
                         </form>
                     </td>
-
                 </tr>
             </template>
         </tbody>

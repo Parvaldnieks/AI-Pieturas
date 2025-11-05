@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pieturas_id')->constrained('pieturas')->onDelete('cascade');
             $table->string('mp3_path')->nullable()->default(null);
+            $table->string('name');
             $table->string('text');
             $table->unsignedBigInteger('time')->nullable()->default(null);
             $table->timestamps();
