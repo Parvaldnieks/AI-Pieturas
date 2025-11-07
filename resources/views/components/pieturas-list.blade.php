@@ -26,6 +26,7 @@
         <thead>
             <tr>
                 <th class="py-3 border-b border-gray-200">{{ __('Nosaukums') }}</th>
+                <th class="border-b border-gray-200">{{ __('Atskaņot') }}</th>
                 <th class="border-b border-gray-200">{{ __('Teksts') }}</th>
                 <th class="border-b border-gray-200">{{ __('Darbības') }}</th>
             </tr>
@@ -42,7 +43,7 @@
 
             <template x-for="pietura in filtered" :key="pietura.id">
                 <tr>
-                    {{-- Nosaukums → SHOW --}}
+
                     <td class="px-6 py-4 border-b border-gray-200">
                         <a 
                             :href="`/pieturas/${pietura.id}`"
@@ -51,10 +52,18 @@
                         ></a>
                     </td>
 
-                    {{-- Teksts --}}
+                    <td class="px-6 py-4 border-b border-gray-200">
+                        <audio
+                            :src="pietura.latest_mp3_path ? `/storage/${pietura.latest_mp3_path}` : ''"
+                            x-show="pietura.latest_mp3_path"
+                            controls
+                            preload="none"
+                            class="w-64">
+                        </audio>
+                    </td>
+
                     <td class="px-6 py-4 border-b border-gray-200" x-text="pietura.text"></td>
 
-                    {{-- Darbības: Edit + Delete --}}
                     <td class="px-6 py-4 border-b border-gray-200 space-x-3">
                         <a 
                             :href="`/pieturas/${pietura.id}/edit`"

@@ -6,9 +6,30 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto mt-6 bg-white dark:bg-gray-800 shadow rounded-lg p-6">
-        <p class="text-gray-700 dark:text-gray-300 mb-4">
-            <strong>Nosaukums:</strong> {{ $pietura->name }}
-        </p>
+        <div class="flex justify-between">
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+                <strong>Nosaukums:</strong> {{ $pietura->name }}
+            </p>
+
+            @if($mp3->vestures && $mp3->vestures->isNotEmpty())
+                @php
+                    $latestVesture = $mp3->vestures->first();
+                @endphp
+
+                @if($latestVesture->mp3_path)
+                    <div class="mb-6">
+                        <a 
+                            href="{{ route('mp3.download', $latestVesture->id) }}"
+                            class="inline-block text-blue-500 hover:text-blue-700 hover:underline"
+                        >
+                            {{ __('Lejupielādēt MP3') }}
+                        </a>
+                    </div>
+                @else
+                    <p class="text-gray-500 italic">{{ __('Fails nav atrasts!') }}</p>
+                @endif
+            @endif
+        </div>
 
         <p class="text-gray-700 dark:text-gray-300 mb-4">
             <strong>Teksts:</strong> {{ $pietura->text }}

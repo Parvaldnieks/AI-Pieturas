@@ -16,8 +16,13 @@ class PieturasController extends Controller
 
     public function show($id)
     {
+        $mp3 = Pieturas::with(['vestures' => function ($query) {
+            $query->orderByDesc('time');
+        }])->findOrFail($id);
+
         $pietura = Pieturas::findOrFail($id);
-        return view('pieturas.show', compact('pietura'));
+        
+        return view('pieturas.show', compact('pietura', 'mp3'));
     }
 
     public function create()

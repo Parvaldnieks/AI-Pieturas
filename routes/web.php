@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\VesturesController;
-use App\Http\Controllers\PieturasController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mp3Controller;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VesturesController;
+use App\Http\Controllers\PieturasController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
 
 // Mp3
 Route::resource('mp3', Mp3Controller::class);
+Route::get('/download/{id}', [Mp3Controller::class, 'download'])->name('mp3.download');
+Route::post('/mp3/sync', [Mp3Controller::class, 'start'])->name('mp3.sync');
 
 // Pieturas routes
 Route::resource('pieturas', PieturasController::class);
