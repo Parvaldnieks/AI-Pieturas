@@ -2,7 +2,7 @@
     <div class="container max-w-[500px] mx-auto p-4">
         <x-slot name="header">
             <h2 class="font-semibold text-xl dark:text-white">
-                {{ __('Izveidot Lietotāju') }}
+                {{ t('users.create.view', 'Izveidot Lietotāju') }}
             </h2>
         </x-slot>
 
@@ -15,7 +15,7 @@
                 @csrf
 
                 <div>
-                    <x-input-label for="name" :value="__('Vārds')" />
+                    <x-input-label for="name" :value="t('users.create.name', 'Vārds')" />
                     <x-text-input 
                         id="name"
                         name="name"
@@ -27,7 +27,7 @@
                 </div>
 
                 <div>
-                    <x-input-label for="email" :value="__('E-pasts')" />
+                    <x-input-label for="email" :value="t('users.create.email', 'E-pasts')" />
                     <x-text-input 
                         id="email"
                         name="email"
@@ -39,7 +39,7 @@
                 </div>
 
                 <div>
-                    <x-input-label for="password" :value="__('Parole')" />
+                    <x-input-label for="password" :value="t('users.create.password', 'Parole')" />
                     <x-text-input 
                         id="password"
                         name="password"
@@ -51,11 +51,11 @@
 
                 <div class="flex justify-between mt-6">
                     <x-primary-button href="{{ route('users.index') }}">
-                        {{ __('Atpakaļ') }}
+                        {{ t('users.create.back', 'Atpakaļ') }}
                     </x-primary-button>
 
                     <x-primary-button>
-                        {{ __('Saglabāt') }}
+                        {{ t('users.create.save', 'Saglabāt') }}
                     </x-primary-button>
                 </div>
             </form>

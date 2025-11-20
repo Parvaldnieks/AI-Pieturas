@@ -1,11 +1,18 @@
 @props(['pieturas', 'user', 'admin'])
 
+@php
+    $manas = t('pieturas.index.mine', 'Manas');
+    $visas = t('pieturas.index.all', 'Visas');
+@endphp
+
 <div 
     x-data="{ 
         search: '', 
         showMine: false,
         user: {{ $user }},
         pieturas: {{ $pieturas->toJson() }},
+        manas: @js($manas),
+        visas: @js($visas),
         get filtered() {
             let list = this.pieturas;
 
@@ -30,7 +37,7 @@
         <input 
             type="text" 
             x-model="search"
-            placeholder="Meklēt pieturas..."
+            placeholder="{{ t('pieturas.index.search', 'Meklēt pieturas') }}..."
             class="border border-gray-300 rounded px-2 py-2 focus:border-orange-500 focus:ring-red-500"
         >
 
@@ -40,7 +47,7 @@
                     type="button" 
                     @click="showMine = !showMine"
                 >
-                    <span x-text="showMine ? 'Visas' : 'Manas'"></span>
+                    <span x-text="showMine ? visas : manas"></span>
                 </x-primary-button>
             </div>
         @endif
@@ -49,12 +56,12 @@
     <table class="w-full border-collapse text-center">
         <thead>
             <tr class="dark:text-white border-b border-orange-500">
-                <th>{{ __('Nosaukums') }}</th>
-                <th>{{ __('Atskaņot') }}</th>
-                <th>{{ __('Teksts') }}</th>
+                <th>{{ t('pieturas.index.name', 'Nosaukums') }}</th>
+                <th>{{ t('pieturas.index.audio', 'Atskaņot') }}</th>
+                <th>{{ t('pieturas.index.text', 'Teksts') }}</th>
                 @if (auth()->user()->hasPermission('izveidot_pieturas'))
                     <template x-if="showMine || {{ $admin ? 'true' : 'false' }}">
-                        <th>{{ __('Darbības') }}</th>
+                        <th>{{ t('pieturas.index.actions', 'Darbības') }}</th>
                     </template>
                 @endif
             </tr>
@@ -64,7 +71,7 @@
             <template x-if="filtered.length === 0">
                 <tr>
                     <td colspan="4" class="text-gray-500 italic text-center py-4">
-                        Nekas netika atrasts.
+                        {{ t('pieturas.index.empty', 'Nekas netika atrasts.') }}
                     </td>
                 </tr>
             </template>
@@ -99,7 +106,7 @@
                                     :href="`/pieturas/${pietura.id}/edit`"
                                     class="text-yellow-500 hover:text-yellow-700 hover:underline"
                                 >
-                                    Rediģēt
+                                    {{ t('pieturas.index.edit', 'Rediģēt') }}
                                 </a>
 
                                 <form 
@@ -110,10 +117,11 @@
                                     @csrf
                                     @method('DELETE')
                                     <button 
-                                        type="submit" 
+                                        type="submit"
+                                        onclick="return confirm( '{{ t('pieturas.index.confirm', 'Dzēst šo pieturu?') }}' )"
                                         class="text-red-500 hover:text-red-700 hover:underline"
                                     >
-                                        Dzēst
+                                        {{ t('pieturas.index.delete', 'Dzēst') }}
                                     </button>
                                 </form>
                             </td>

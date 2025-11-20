@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mp3Controller;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ValodasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VesturesController;
 use App\Http\Controllers\PieturasController;
+use App\Http\Controllers\TulkojumsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,5 +40,13 @@ Route::resource('vestures', VesturesController::class)
 Route::middleware('admin')->group(function () {
     Route::resource('users', UserController::class);
 });
+
+// Valodas
+Route::post('/valodas/{valoda}/sync', [ValodasController::class, 'start'])->name('valodas.sync');
+Route::resource('valodas', ValodasController::class);
+Route::post('/valodas/maina', [ValodasController::class, 'switch'])->name('valodas.maina');
+Route::get('valodas/{valoda}/tulkojums', [TulkojumsController::class, 'index'])->name('tulkojums.index');
+Route::get('valodas/{valoda}/tulkojums/{original}/edit', [TulkojumsController::class, 'edit'])->name('tulkojums.edit');
+Route::put('valodas/{valoda}/tulkojums/{original}', [TulkojumsController::class, 'update'])->name('tulkojums.update');
 
 require __DIR__.'/auth.php';

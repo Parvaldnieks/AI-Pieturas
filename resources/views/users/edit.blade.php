@@ -2,7 +2,7 @@
     <div class="container max-w-[500px] mx-auto p-4">
         <x-slot name="header">
             <h2 class="font-semibold text-xl dark:text-white">
-                {{ __('Rediģēt Lietotāju') }}
+                {{ t('users.edit.view', 'Rediģēt Lietotāju') }}
             </h2>
         </x-slot>
 
@@ -17,7 +17,7 @@
                 @method('PUT')
 
                 <div>
-                    <x-input-label for="name" :value="__('Vārds')" />
+                    <x-input-label for="name" :value="t('users.edit.name', 'Vārds')" />
                     <x-text-input 
                         id="name"
                         name="name"
@@ -29,7 +29,7 @@
                 </div>
 
                 <div>
-                    <x-input-label for="email" :value="__('E-pasts')" />
+                    <x-input-label for="email" :value="t('users.edit.email', 'E-pasts')" />
                     <x-text-input 
                         id="email"
                         name="email"
@@ -40,7 +40,7 @@
                 </div>
 
                 <div>
-                    <x-input-label for="password" :value="__('Parole (var nemainīt)')" />
+                    <x-input-label for="password" :value="t('users.edit.password', 'Parole (var nemainīt)')" />
                     <x-text-input 
                         id="password"
                         name="password"
@@ -59,12 +59,12 @@
                             class="rounded border-gray-300 text-orange-600 focus:ring-orange-500"
                             {{ $user->admin ? 'checked' : '' }}
                         >
-                        <span class="ml-2 dark:text-white">Administrators</span>
+                        <span class="ml-2 dark:text-white">{{ t('users.edit.admin', 'Administrators') }}</span>
                     </label>
                 </div>
 
                 <div class="mt-6">
-                    <h2 class="text-lg font-semibold mb-2 dark:text-white">{{ __('Privilēģijas') }}</h2>
+                    <h2 class="text-lg font-semibold mb-2 dark:text-white">{{ t('users.edit.permissions', 'Privilēģijas') }}</h2>
                     <div class="bg-white dark:bg-black shadow p-4 rounded grid grid-cols-1 sm:grid-cols-2 gap-2">
                         @foreach ($permissions as $permission)
                             <label class="inline-flex items-center space-x-2 dark:text-white">
@@ -75,7 +75,7 @@
                                     {{ in_array($permission->id, $userPermissions) ? 'checked' : '' }}
                                     class="rounded border-gray-300 text-orange-600 focus:ring-orange-500"
                                 >
-                                <span>{{ $permission->name }}</span>
+                                <span>{{ t('permission.' . $permission->name, $permission->name) }}</span>
                             </label>
                         @endforeach
                     </div>
@@ -83,11 +83,11 @@
 
                 <div class="flex justify-between mt-6">
                     <x-primary-button href="{{ route('users.index') }}">
-                        {{ __('Atpakaļ') }}
+                        {{ t('users.edit.back', 'Atpakaļ') }}
                     </x-primary-button>
 
                     <x-primary-button>
-                        {{ __('Saglabāt') }}
+                        {{ t('users.edit.save', 'Saglabāt') }}
                     </x-primary-button>
                 </div>
             </form>

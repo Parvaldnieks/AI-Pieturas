@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl dark:text-white">
-            {{ __('Rediģēt Pieturu') }}
+            {{ t('pieturas.edit.view', 'Rediģēt Pieturu') }}
         </h2>
     </x-slot>
 
@@ -17,22 +17,22 @@
                 @method('PUT')
 
                 <div class="grid grid-cols-1 gap-4 py-4 px-4">
-                        <x-input-label for="name" :value="__('Nosaukums')" />
+                        <x-input-label for="name" :value="t('pieturas.edit.name', 'Nosaukums')" />
                         <x-text-input type="text" id="name" name="name" value="{{ old('name', $pietura->name) }}" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
 
-                        <x-input-label for="text" :value="__('Teksts')" />
+                        <x-input-label for="text" :value="t('pieturas.edit.text', 'Teksts')" />
                         <x-text-input type="text" id="text" name="text" value="{{ old('text', $pietura->text) }}" />
                         <x-input-error :messages="$errors->get('text')" class="mt-2" />
                 </div>
 
                 <div class="flex justify-between py-4 px-4">
                     <x-primary-button href="{{ route('pieturas.index') }}">
-                            {{ __('Atpakaļ') }}
+                            {{ t('pieturas.edit.back', 'Atpakaļ') }}
                     </x-primary-button>
 
                     <x-primary-button>
-                        {{ __('Saglabāt') }}
+                        {{ t('pieturas.edit.save', 'Saglabāt') }}
                     </x-primary-button>
                 </div>
             </form>

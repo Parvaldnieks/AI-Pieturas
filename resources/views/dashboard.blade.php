@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl dark:text-white">
-            {{ __('Sākums') }}
+            {{ t('dashboard.view', 'Sākums') }}
         </h2>
     </x-slot>
 
@@ -13,7 +13,7 @@
                     <div class="flex justify-left items-center">
 
                         @if (auth()->check() && auth()->user()->admin)
-                            {{ __("Ar šo pogu tiek sinhronizēti visi MP3 faili, ja pieturām ir mainījies teksts!") }}
+                            {{ t('dashboard.sync.text', 'Ar šo pogu tiek sinhronizēti visi MP3 faili, ja pieturām ir mainījies teksts!') }}
 
                             <form 
                                 method="POST" 
@@ -24,7 +24,7 @@
                             >
                                 @csrf
                                 <x-primary-button spinner="true">
-                                    {{ __('Sinhronizēt') }}
+                                    {{ t('dashboard.sync', 'Sinhronizēt') }}
                                 </x-primary-button>
                             </form>
 
@@ -41,7 +41,7 @@
                             @endif
                         @else
                             <p class="text-lg font-medium">
-                                Sveiki, {{ auth()->user()->name }}! Lai piekļūtu pilnajai tīmekļa vietnes versijai, jums ir jāsazinās ar administratoru.
+                                {{ t('dashboard.welcome', 'Sveiki') }}, {{ auth()->user()->name }}! {{ t('dashboard.welcome.text', 'Lai piekļūtu pilnajai tīmekļa vietnes versijai, jums ir jāsazinās ar administratoru.') }}
                             </p>
                         @endif
 

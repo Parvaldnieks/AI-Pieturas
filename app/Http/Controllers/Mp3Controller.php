@@ -50,19 +50,29 @@ class Mp3Controller extends Controller
 
         $jobs = [];
 
-        foreach ($latest as $v) {
-            $previous = Vesture::where('pieturas_id', $v->pieturas_id)
-                ->where('id', '<', $v->id)
+        foreach ($latest as $current) {
+            $previous = Vesture::where('pieturas_id', $current->pieturas_id)
+                ->where('id', '<', $current->id)
                 ->orderByDesc('id')
                 ->first();
 
-            if ($previous && $previous->text !== $v->text) {
-                $jobs[] = new GenerateMp3Job($v->id);
+            if (!$previous) {
+                continue;
+            }
+
+            $textChanged = $current->text !== $previous->text;
+
+            $mp3StillOld = $current->mp3_path === $previous->mp3_path;
+
+            $delayPerJob = 2;
+
+            if ($textChanged && $mp3StillOld) {
+                $jobs[] = (new GenerateMp3Job($current->id))->delay($delayPerJob * count($jobs));
             }
         }
 
         if (empty($jobs)) {
-            return back()->with('success', 'Viss ir jau sinhronizēts. Nekas nav jāatjauno.');
+            return back()->with('success', t('dashboard.sync.empty', 'Viss ir jau sinhronizēts. Nekas nav jāatjauno.'));
         }
 
         $batch = Bus::batch($jobs)
@@ -70,6 +80,7 @@ class Mp3Controller extends Controller
             ->onQueue('mp3-generation')
             ->dispatch();
 
-        return back()->with('success', "Sinhronizācija sākta. Queued: {$batch->totalJobs} faili.");
+        return back()->with('success', t('dashboard.sync.started', 'Sinhronizācija sākta.') . ' '
+        . t('dashboard.sync.count', 'Sinhronizāciju gaida:') . ' ' . $batch->totalJobs . ' ' . t('dashboard.sync.files', 'faili.'));
     }
 }

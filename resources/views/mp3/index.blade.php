@@ -2,7 +2,7 @@
     <div class="container max-w-[800px] mx-auto p-4">
         <x-slot name="header">
             <h2 class="font-semibold text-xl dark:text-white">
-                {{ __('MP3 Faili') }}
+                {{ t('mp3.index.view', 'MP3 Faili') }}
             </h2>
         </x-slot>
 
@@ -24,13 +24,13 @@
                 <input 
                     type="text" 
                     x-model="search"
-                    placeholder="Meklēt MP3 failus..."
+                    placeholder="{{ t('mp3.index.search', 'Meklēt MP3 failus') }}..."
                     class="rounded px-3 py-2 w-full mb-6 focus:border-orange-500 focus:ring-orange-500"
                 >
 
                 <template x-if="filtered.length === 0">
                     <p class="text-center text-gray-500">
-                        {{ __('Nekas netika atrasts.') }}
+                        {{ t('mp3.index.empty', 'Nekas netika atrasts.') }}
                     </p>
                 </template>
 

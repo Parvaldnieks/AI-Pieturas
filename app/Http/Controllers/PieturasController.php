@@ -41,12 +41,6 @@ class PieturasController extends Controller
         $data = $request->validate([
             'name' => ['required', 'max:50'],
             'text' => ['required', 'max:255', 'regex:/^[a-zA-ZāčēģīķļņšūžĀČĒĢĪĶĻŅŠŪŽ\s!?,.]+$/u'],
-        ], [
-            'name.required' => __('Nosaukums ir nepieciešams!'),
-            'name.max' => __('Nosaukums nedrīkst pārsniegt 50 rakstzīmes!'),
-            'text.required' => __('Teksts ir nepieciešams!'),
-            'text.max' => __('Teksts nedrīkst pārsniegt 255 rakstzīmes!'),
-            'text.regex' => __('Teksts nedrīkst saturēt ciparus!'),
         ]);
 
         $data['user_id'] = auth()->id();
@@ -67,12 +61,6 @@ class PieturasController extends Controller
         $data = $request->validate([
             'name' => ['required', 'max:50'],
             'text' => ['required', 'max:255', 'regex:/^[a-zA-ZāčēģīķļņšūžĀČĒĢĪĶĻŅŠŪŽ\s!?,.]+$/u'],
-        ], [
-            'name.required' => __('Nosaukums ir nepieciešams!'),
-            'name.max' => __('Nosaukums nedrīkst pārsniegt 50 rakstzīmes!'),
-            'text.required' => __('Teksts ir nepieciešams!'),
-            'text.max' => __('Teksts nedrīkst pārsniegt 255 rakstzīmes!'),
-            'text.regex' => __('Teksts nedrīkst saturēt ciparus!'),
         ]);
 
         $pietura = Pieturas::findOrFail($id);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AdminOnly;
+use App\Http\Middleware\SetValoda;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\CheckPermission;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -15,7 +16,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'permission' => CheckPermission::class,
-            'admin' => AdminOnly::class
+            'admin' => AdminOnly::class,
+            'valoda' => SetValoda::class
+        ]);
+
+        $middleware->web([
+            SetValoda::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -1,14 +1,14 @@
 <x-app-layout>
         <x-slot name="header">
         <h2 class="font-semibold text-xl dark:text-white">
-            {{ __('Pieturas') }}
+            {{ t('pieturas.index.view', 'Pieturas') }}
         </h2>
     </x-slot>
 
     @if (auth()->user()->hasPermission('izveidot_pieturas'))
         <div class="flex justify-center mt-6">
             <x-primary-button href="{{ route('pieturas.create') }}">
-                {{ __('Izveidot') }}
+                {{ t('pieturas.create', 'Izveidot') }}
             </x-primary-button>
         </div>
     @endif

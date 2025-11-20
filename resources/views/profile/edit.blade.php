@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl dark:text-white">
-            {{ __('Profils') }}
+            {{ t('profile.edit.view', 'Profils') }}
         </h2>
     </x-slot>
 

@@ -26,7 +26,7 @@
         <input 
             type="text" 
             x-model="search"
-            placeholder="Meklēt vēsturi..."
+            placeholder="{{ t('vestures.index.search', 'Meklēt vēsturi') }}..."
             class="rounded px-3 py-2 mb-4 w-full focus:border-orange-500 focus:ring-orange-500"
         >
 
@@ -41,9 +41,9 @@
     <table class="w-full border-collapse text-center dark:text-white">
         <thead>
             <tr class="border-b border-orange-500">
-                <th>{{ __('MP3 Fails') }}</th>
-                <th>{{ __('Teksts') }}</th>
-                <th>{{ __('Darbības') }}</th>
+                <th>{{ t('vestures.index.mp3', 'MP3 Fails') }}</th>
+                <th>{{ t('vestures.index.text', 'Teksts') }}</th>
+                <th>{{ t('vestures.index.actions', 'Darbības') }}</th>
             </tr>
         </thead>
 
@@ -51,7 +51,7 @@
             <template x-if="filtered.length === 0">
                 <tr>
                     <td colspan="3" class="text-gray-500 text-center py-4">
-                        Nekas netika atrasts.
+                        {{ t('vestures.index.empty', 'Nekas netika atrasts.') }}
                     </td>
                 </tr>
             </template>
@@ -64,7 +64,7 @@
                                 :href="`/vestures/${vesture.id}`" 
                                 class="text-blue-500 hover:text-blue-700 hover:underline"
                             >
-                                MP3 Fails
+                                {{ t('vestures.index.show', 'MP3 Fails') }}
                             </a>
                         </template>
 
@@ -85,8 +85,12 @@
                         <form :action="`/vestures/${vesture.id}`" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:text-red-700 hover:underline">
-                                Dzēst
+                            <button
+                                type="submit"
+                                onclick="return confirm( '{{ t('vestures.index.confirm', 'Dzēst šo vēsturi?') }}' )"
+                                class="text-red-500 hover:text-red-700 hover:underline"
+                            >
+                                {{ t('vestures.index.delete', 'Dzēst') }}
                             </button>
                         </form>
                     </td>

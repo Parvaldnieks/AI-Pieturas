@@ -2,7 +2,7 @@
     <div class="container mx-auto p-4">
         <x-slot name="header">
             <h2 class="font-semibold text-xl dark:text-white">
-                {{ __('Pietura: ') }} {{ $pietura->name }}
+                {{ t('pieturas.show.view', 'Pietura') }}: {{ $pietura->name }}
             </h2>
         </x-slot>
 
@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-black shadow rounded-lg p-6">
                 <div class="flex justify-between">
                     <p class="dark:text-white">
-                        <strong>Nosaukums:</strong> {{ $pietura->name }}
+                        <strong>{{ t('pieturas.show.name', 'Nosaukums:') }}</strong> {{ $pietura->name }}
                     </p>
 
                     @if($mp3->vestures && $mp3->vestures->isNotEmpty())
@@ -24,7 +24,7 @@
                                     href="{{ route('mp3.download', $latestVesture->id) }}"
                                     class="inline-block text-blue-500 hover:text-blue-700 hover:underline"
                                 >
-                                    {{ __('Lejupielādēt MP3') }}
+                                    {{ t('pieturas.show.download', 'Lejupielādēt MP3') }}
                                 </a>
                             </div>
                         @else
@@ -34,11 +34,11 @@
                 </div>
 
                 <p class="dark:text-white mb-6">
-                    <strong>Teksts:</strong> {{ $pietura->text }}
+                    <strong>{{  t('pieturas.show.text', 'Teksts:') }}</strong> {{ $pietura->text }}
                 </p>
 
                 @if($pietura->vestures && $pietura->vestures->isNotEmpty())
-                    <h3 class="text-lg font-semibold mb-2 dark:text-white">Vēsture</h3>
+                    <h3 class="text-lg font-semibold mb-2 dark:text-white">{{ t('pieturas.show.history', 'Vēsture') }}</h3>
                     <ul class="dark:text-white list-disc ml-6 space-y-2">
 
                             @foreach($pietura->vestures as $i => $current)
@@ -50,21 +50,33 @@
                                 @if($older)
                                     @if($current->name !== $older->name)
                                     <li>
-                                        Nosaukums mainīts no <strong class="underline">{{ $older->name }}</strong> uz <strong class="underline">{{ $current->name }}</strong>
+                                        {{ t('pieturas.show.history.edit.old.name', 'Nosaukums mainīts no') }}
+                                        <strong class="underline">{{ $older->name }}</strong>
+
+                                        {{ t('pieturas.show.history.edit.new.name', 'uz') }}
+                                        <strong class="underline">{{ $current->name }}</strong>
                                         <span class="text-gray-500">({{ $date }})</span>
                                     </li>
                                     @endif
 
                                     @if($current->text !== $older->text)
                                     <li>
-                                        Teksts mainīts no <strong class="underline">{{ $older->text }}</strong> uz <strong class="underline">{{ $current->text }}</strong>
+                                        {{ t('pieturas.show.history.edit.old.text', 'Teksts mainīts no') }}
+                                        <strong class="underline">{{ $older->text }}</strong>
+                                        
+                                        {{ t('pieturas.show.history.edit.new.text', 'uz') }}
+                                        <strong class="underline">{{ $current->text }}</strong>
                                         <span class="text-gray-500">({{ $date }})</span>
                                     </li>
                                     @endif
                                 @else
                                     <li>
-                                    Pietura izveidota ar nosaukumu <strong class="underline"><span>{{ $current->name }}</span></strong> un tekstu <strong class="underline"><span>{{ $current->text }}</span></strong>
-                                    <span class="text-gray-500">({{ $date }})</span>
+                                        {{ t('pieturas.show.history.created.name', 'Pietura izveidota ar nosaukumu') }}
+                                        <strong class="underline"><span>{{ $current->name }}</span></strong>
+
+                                        {{ t('pieturas.show.history.created.text', 'un tekstu') }}
+                                        <strong class="underline"><span>{{ $current->text }}</span></strong>
+                                        <span class="text-gray-500">({{ $date }})</span>
                                     </li>
                                 @endif
                             @endforeach
@@ -73,7 +85,7 @@
 
                 <div class="mt-8">
                     <x-primary-button href="{{ route('pieturas.index') }}">
-                            {{ __('Atpakaļ') }}
+                            {{ t('pieturas.show.back', 'Atpakaļ') }}
                     </x-primary-button>
                 </div>
             </div>

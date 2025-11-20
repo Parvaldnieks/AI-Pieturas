@@ -16,6 +16,7 @@ class PermissionSeeder extends Seeder
         $permissions = [
             'skatit_pieturas',
             'izveidot_pieturas',
+            'izveidot_valodas',
         ];
 
         foreach ($permissions as $permission) {

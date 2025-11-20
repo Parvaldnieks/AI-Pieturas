@@ -3,6 +3,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
+                <x-language-switcher />
+
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
@@ -13,14 +15,14 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Sākums') }}
+                        {{ t('dashboard.view.link', 'Sākums') }}
                     </x-nav-link>
                 </div>
 
                 @if (auth()->user()->hasPermission('skatit_pieturas'))
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('pieturas.index')" :active="request()->routeIs('pieturas.index')">
-                            {{ __('Pieturas') }}
+                            {{ t('pieturas.index.view.link', 'Pieturas') }}
                         </x-nav-link>
                     </div>
                 @endif
@@ -28,7 +30,7 @@
                 @if (auth()->user()->hasPermission('izveidot_pieturas'))
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('vestures.index')" :active="request()->routeIs('vestures.index')">
-                            {{ __('Vēsture') }}
+                            {{ t('vestures.index.view.link', 'Vēsture') }}
                         </x-nav-link>
                     </div>
                 @endif
@@ -36,7 +38,7 @@
                 @if (auth()->user()->hasPermission('skatit_pieturas'))
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('mp3.index')" :active="request()->routeIs('mp3.index')">
-                            {{ __('MP3') }}
+                            {{ t('mp3.index.view.link', 'MP3') }}
                         </x-nav-link>
                     </div>
                 @endif
@@ -44,10 +46,16 @@
                 @if (auth()->check() && auth()->user()->admin)
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                            {{ __('Lietotāji') }}
+                            {{ t('users.index.view.link', 'Lietotāji') }}
                         </x-nav-link>
                     </div>
                 @endif
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('valodas.index')" :active="request()->routeIs('valodas.index')">
+                            {{ t('valodas.index.view.link', 'Valodas') }}
+                        </x-nav-link>
+                    </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -81,7 +89,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ t('profile.link', 'Profils') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -91,7 +99,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ t('logout.link', 'Iziet') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -114,30 +122,30 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ t('dashboard.view.link', 'Sākums') }}
             </x-responsive-nav-link>
 
             @if (auth()->user()->hasPermission('izveidot_pieturas'))
                 <x-responsive-nav-link :href="route('pieturas.index')" :active="request()->routeIs('pieturas')">
-                    {{ __('Pieturas') }}
+                    {{ t('pieturas.index.view.link', 'Pieturas') }}
                 </x-responsive-nav-link>
             @endif
 
             @if (auth()->user()->hasPermission('izveidot_pieturas'))
                 <x-responsive-nav-link :href="route('vestures.index')" :active="request()->routeIs('vestures')">
-                    {{ __('Vēsture') }}
+                    {{ t('vestures.index.view.link', 'Vēsture') }}
                 </x-responsive-nav-link>
             @endif
 
             @if (auth()->user()->hasPermission('izveidot_pieturas'))
                 <x-responsive-nav-link :href="route('mp3.index')" :active="request()->routeIs('mp3')">
-                    {{ __('MP3') }}
+                    {{ t('mp3.index.view.link', 'MP3') }}
                 </x-responsive-nav-link>
             @endif
 
             @if (auth()->check() && auth()->user()->admin)
                 <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users')">
-                    {{ __('Lietotāji') }}
+                    {{ t('users.index.view.link', 'Lietotāji') }}
                 </x-responsive-nav-link>
             @endif
         </div>
@@ -151,7 +159,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ t('profile.link', 'Profils') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -161,7 +169,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ t('logout.link', 'Iziet') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

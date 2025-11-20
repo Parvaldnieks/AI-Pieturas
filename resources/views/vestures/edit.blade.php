@@ -2,7 +2,7 @@
     <div class="container max-w-[500px] mx-auto p-4">
         <x-slot name="header">
             <h2 class="font-semibold text-xl dark:text-white">
-                {{ __('Rediģēt Vēsturi') }}
+                {{ t('vestures.edit.view', 'Rediģēt Vēsturi') }}
             </h2>
         </x-slot>
 
@@ -16,25 +16,25 @@
                     @method('PUT')
 
                     <div class="grid grid-cols-1 gap-2">
-                            <x-input-label for="name" :value="__('Nosaukums')" />
+                            <x-input-label for="name" :value="t('vestures.edit.name', 'Nosaukums')" />
                             <x-text-input type="text" id="name" name="name" value="{{ old('name', $vesture->name) }}" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
 
-                            <x-input-label for="text" :value="__('Teksts')" />
+                            <x-input-label for="text" :value="t('vestures.edit.text', 'Teksts')" />
                             <x-text-input type="text" id="text" name="text" value="{{ old('text', $vesture->text) }}" />
                             <x-input-error :messages="$errors->get('text')" class="mt-2" />
 
-                            <x-input-label for="time" :value="__('Laiks')" />
+                            <x-input-label for="time" :value="t('vestures.edit.time', 'Laiks')" />
                             <x-text-input type="datetime-local" id="time" name="time" value="{{ old('time', $vesture->formatted_time ?? '') }}" />
                             <x-input-error :messages="$errors->get('time')" class="mt-2" />
 
                         <div class="mt-6">
-                            <x-input-label :value="__('MP3 Fails')" />
+                            <x-input-label :value="t('vestures.edit.file', 'MP3 Fails')" />
                             <x-text-input type="file" name="file" accept=".mp3" />
 
                             @if($vesture->mp3_path)
                                 <div>
-                                    <p class="text-sm text-gray-500">{{ __('Pašreizējais fails:') }}</p>
+                                    <p class="mt-4 text-sm text-gray-500">{{ t('vestures.edit.current', 'Pašreizējais fails:') }}</p>
                                     <audio controls class="mt-1 w-full">
                                         <source src="{{ asset('storage/'.$vesture->mp3_path) }}" type="audio/mpeg">
                                         Jūsu pārlūkprogramma neatbalsta audio atskaņošanu.
@@ -45,11 +45,11 @@
 
                         <div class="flex justify-between">
                             <x-primary-button href="{{ route('vestures.index') }}">
-                                    {{ __('Atpakaļ') }}
+                                    {{ t('vestures.edit.back', 'Atpakaļ') }}
                             </x-primary-button>
 
                             <x-primary-button>
-                                    {{ __('Saglabāt') }}
+                                    {{ t('vestures.edit.save', 'Saglabāt') }}
                             </x-primary-button>
                         </div>
                     </div>

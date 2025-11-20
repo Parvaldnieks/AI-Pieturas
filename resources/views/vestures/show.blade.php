@@ -2,7 +2,7 @@
     <div class="container max-w-[500px] mx-auto p-4">
     <x-slot name="header">
         <h2 class="font-semibold text-xl dark:text-white">
-            {{ __('MP3 Fails') }}
+            {{ t('vestures.show.view', 'MP3 Fails') }}
         </h2>
     </x-slot>
 
@@ -25,11 +25,11 @@
 
             <div class="flex justify-between mt-6">
                 <x-primary-button href="{{ route('vestures.index') }}">
-                        {{ __('Atpakaļ') }}
+                        {{ t('vestures.show.back', 'Atpakaļ') }}
                 </x-primary-button>
 
                 <x-primary-button href="{{ route('vestures.edit', $vesture->id) }}">
-                        {{ __('Rediģēt') }}
+                        {{ t('vestures.show.edit', 'Rediģēt') }}
                 </x-primary-button>
             </div>
         </div>

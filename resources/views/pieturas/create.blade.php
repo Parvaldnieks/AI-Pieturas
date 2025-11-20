@@ -2,7 +2,7 @@
     <div class="container mx-auto p-4 flex flex-col items-center" x-data="{ submitting: false }">
         <x-slot name="header">
             <h2 class="font-semibold text-xl dark:text-white">
-                {{ __('Izveidot Pieturu') }}
+                {{ t('pieturas.create.view', 'Izveidot Pieturu') }}
             </h2>
         </x-slot>
 
@@ -17,22 +17,22 @@
                 @csrf
 
                     <div class="grid grid-cols-1 gap-4 py-4 px-4">
-                        <x-input-label for="name" :value="__('Nosaukums')" />
+                        <x-input-label for="name" :value="t('pieturas.create.name', 'Nosaukums')" />
                         <x-text-input type="text" id="name" name="name" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
 
-                        <x-input-label for="text" :value="__('Teksts')" />
+                        <x-input-label for="text" :value="t('pieturas.create.text', 'Teksts')" />
                         <x-text-input type="text" id="text" name="text" />
                         <x-input-error :messages="$errors->get('text')" class="mt-2" />
                     </div>
 
                     <div class="flex justify-between py-4 px-4">
                         <x-primary-button href="{{ route('pieturas.index') }}">
-                                {{ __('Atpakaļ') }}
+                                {{ t('pieturas.create.back', 'Atpakaļ') }}
                         </x-primary-button>
 
                         <x-primary-button :spinner="true">
-                                {{ __('Izveidot') }}
+                                {{ t('pieturas.create.save', 'Izveidot') }}
                         </x-primary-button>
                     </div>
             </form>
