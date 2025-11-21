@@ -79,6 +79,8 @@ class Mp3Controller extends Controller
             ->name('MP3 sync for latest pieturas')
             ->onQueue('mp3-generation')
             ->dispatch();
+        
+        session(['last_batch' => $batch->id]);
 
         return back()->with('success', t('dashboard.sync.started', 'Sinhronizācija sākta.') . ' '
         . t('dashboard.sync.count', 'Sinhronizāciju gaida:') . ' ' . $batch->totalJobs . ' ' . t('dashboard.sync.files', 'faili.'));

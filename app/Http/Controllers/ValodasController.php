@@ -12,9 +12,18 @@ class ValodasController extends Controller
 {
     public function index()
     {
-        $valodas = Valodas::orderBy('name')->get();
+        $originals = Originals::count();
 
-        return view('valodas.index', compact('valodas'));
+        $valodas = Valodas::withCount([
+            'tulkojumi as translated_count' => function ($q) {
+                $q->whereNotNull('translation')
+                ->where('translation', '!=', '');
+            }
+        ])
+        ->orderBy('name')
+        ->get();
+
+        return view('valodas.index', compact('valodas', 'originals'));
     }
 
     public function create()
@@ -67,7 +76,7 @@ class ValodasController extends Controller
     public function start(Valodas $valoda)
     {
         if ($valoda->code === 'lv') {
-            return back()->with('success', t('valodas.sync.original', 'Bāzes valodai nav nepieciešama sinhronizācija.'));
+            return back();
         }
 
         $jobs = [];
@@ -93,7 +102,7 @@ class ValodasController extends Controller
         }
 
         if (empty($jobs)) {
-            return back()->with('success', t('valodas.sync.empty', 'Šai valodai viss jau ir iztulkots.'));
+            return back();
         }
 
         $batch = Bus::batch($jobs)
@@ -101,7 +110,9 @@ class ValodasController extends Controller
             ->onQueue('text-translation')
             ->dispatch();
 
-        return back()->with('success', t('valodas.sync.started', 'Sinhronizācija sākta.') . ' ' . t('valodas.sync.count', 'Tekstu skaits:') . ' ' . $batch->totalJobs);
+        session(['last_batch' => $batch->id]);
+
+        return back()->with('success', t('valodas.sync.started', 'Sinhronizācija sākta!'));
     }
 
     public function switch(Request $request)

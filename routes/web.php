@@ -17,6 +17,25 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/sync/progress/{id}', function ($id) {$batch = Bus::findBatch($id);
+    if (! $batch) {
+        return ['error' => 'Batch not found'];
+    }
+
+    if ($batch->finished()) {
+        session()->forget('last_batch');
+    }
+
+    return [
+        'total'     => $batch->totalJobs,
+        'processed' => $batch->processedJobs(),
+        'failed'    => $batch->failedJobs,
+        'pending'   => $batch->pendingJobs,
+        'progress'  => $batch->progress(),
+        'finished'  => $batch->finished(),
+    ];
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

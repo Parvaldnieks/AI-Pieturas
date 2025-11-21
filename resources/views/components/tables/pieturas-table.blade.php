@@ -29,33 +29,29 @@
 
             return list;
         }
-    }"
-    class="p-6"
->
+    }">
 
-    <div class="max-w-md mx-auto flex flex-col sm:flex-row sm:space-x-4 mb-4">
+    <div class="max-w-md mx-auto flex flex-col">
         <input 
-            type="text" 
+            type="text"
             x-model="search"
             placeholder="{{ t('pieturas.index.search', 'Meklēt pieturas') }}..."
-            class="border border-gray-300 rounded px-2 py-2 focus:border-orange-500 focus:ring-red-500"
-        >
+            class="border border-gray-300 rounded focus:border-orange-500 focus:ring-red-500 mt-4">
 
         @if (auth()->user()->hasPermission('izveidot_pieturas'))
-            <div>
+            <div class="flex justify-center mt-4">
                 <x-primary-button 
                     type="button" 
-                    @click="showMine = !showMine"
-                >
+                    @click="showMine = !showMine">
                     <span x-text="showMine ? visas : manas"></span>
                 </x-primary-button>
             </div>
         @endif
     </div>
 
-    <table class="w-full border-collapse text-center">
+    <table class="w-full dark:text-white text-center mt-4">
         <thead>
-            <tr class="dark:text-white border-b border-orange-500">
+            <tr class="border-b border-orange-500">
                 <th>{{ t('pieturas.index.name', 'Nosaukums') }}</th>
                 <th>{{ t('pieturas.index.audio', 'Atskaņot') }}</th>
                 <th>{{ t('pieturas.index.text', 'Teksts') }}</th>
@@ -77,17 +73,17 @@
             </template>
 
             <template x-for="pietura in filtered" :key="pietura.id">
-                <tr class="border-b border-orange-500 dark:text-white">
+                <tr class="border-b border-orange-500">
 
-                    <td class="h-24">
+                    <td>
                         <a 
                             :href="`/pieturas/${pietura.id}`"
                             class="text-blue-500 hover:text-blue-700 hover:underline"
-                            x-text="pietura.name"
-                        ></a>
+                            x-text="pietura.name">
+                        </a>
                     </td>
 
-                    <td>
+                    <td class="flex justify-center items-center h-20">
                         <audio
                             :src="pietura.latest_mp3_path ? `/storage/${pietura.latest_mp3_path}` : ''"
                             x-show="pietura.latest_mp3_path"
@@ -101,26 +97,24 @@
 
                     @if (auth()->user()->hasPermission('izveidot_pieturas'))
                         <template x-if="showMine || {{ $admin ? 'true' : 'false' }}">
-                            <td class="space-x-3">
-                                <a 
+                            <td>
+                                <a
                                     :href="`/pieturas/${pietura.id}/edit`"
-                                    class="text-yellow-500 hover:text-yellow-700 hover:underline"
-                                >
+                                    class="text-yellow-500 hover:underline mr-2">
                                     {{ t('pieturas.index.edit', 'Rediģēt') }}
                                 </a>
 
                                 <form 
                                     :action="`/pieturas/${pietura.id}`" 
                                     method="POST" 
-                                    class="inline-block"
-                                >
+                                    class="inline">
                                     @csrf
                                     @method('DELETE')
+
                                     <button 
                                         type="submit"
                                         onclick="return confirm( '{{ t('pieturas.index.confirm', 'Dzēst šo pieturu?') }}' )"
-                                        class="text-red-500 hover:text-red-700 hover:underline"
-                                    >
+                                        class="text-red-500 hover:underline">
                                         {{ t('pieturas.index.delete', 'Dzēst') }}
                                     </button>
                                 </form>

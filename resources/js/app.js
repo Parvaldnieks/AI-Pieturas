@@ -1,8 +1,10 @@
 import './bootstrap';
 
 import Alpine from 'alpinejs';
+import syncTracker from './syncTracker';
 
 window.Alpine = Alpine;
+Alpine.data('syncTracker', syncTracker);
 
 Alpine.start();
 

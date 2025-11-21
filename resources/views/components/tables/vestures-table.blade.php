@@ -18,27 +18,23 @@
                 return matchesSearch && formattedDate === this.selectedDate;
             });
         }
-    }"
-    class="p-6"
->
+    }">
 
-    <div class="max-w-md mx-auto flex flex-col sm:flex-row sm:space-x-4">
+    <div class="max-w-md mx-auto flex flex-col mt-4">
         <input 
             type="text" 
             x-model="search"
             placeholder="{{ t('vestures.index.search', 'Meklēt vēsturi') }}..."
-            class="rounded px-3 py-2 mb-4 w-full focus:border-orange-500 focus:ring-orange-500"
-        >
+            class="rounded mb-4 w-full focus:border-orange-500 focus:ring-orange-500">
 
         <input 
             type="date" 
             id="date" 
             x-model="selectedDate"
-            class="rounded px-3 py-2 mb-4 w-full focus:border-orange-500 focus:ring-orange-500"
-        />
+            class="rounded w-full focus:border-orange-500 focus:ring-orange-500">
     </div>
 
-    <table class="w-full border-collapse text-center dark:text-white">
+    <table class="w-full dark:text-white text-center mt-4">
         <thead>
             <tr class="border-b border-orange-500">
                 <th>{{ t('vestures.index.mp3', 'MP3 Fails') }}</th>
@@ -50,7 +46,7 @@
         <tbody>
             <template x-if="filtered.length === 0">
                 <tr>
-                    <td colspan="3" class="text-gray-500 text-center py-4">
+                    <td colspan="3" class="text-gray-500 text-center italic py-4">
                         {{ t('vestures.index.empty', 'Nekas netika atrasts.') }}
                     </td>
                 </tr>
@@ -62,8 +58,7 @@
                         <template x-if="vesture.mp3_path">
                             <a 
                                 :href="`/vestures/${vesture.id}`" 
-                                class="text-blue-500 hover:text-blue-700 hover:underline"
-                            >
+                                class="text-blue-500 hover:underline">
                                 {{ t('vestures.index.show', 'MP3 Fails') }}
                             </a>
                         </template>
@@ -76,20 +71,19 @@
                     <td>
                         <a 
                             :href="`/vestures/${vesture.id}/edit`"
-                            class="text-yellow-500 hover:text-yellow-700 hover:underline"
-                            x-text="vesture.text"
-                        ></a>
+                            class="text-yellow-500 hover:underline"
+                            x-text="vesture.text">
+                        </a>
                     </td>
 
                     <td>
-                        <form :action="`/vestures/${vesture.id}`" method="POST" class="inline-block">
+                        <form :action="`/vestures/${vesture.id}`" method="POST">
                             @csrf
                             @method('DELETE')
                             <button
                                 type="submit"
                                 onclick="return confirm( '{{ t('vestures.index.confirm', 'Dzēst šo vēsturi?') }}' )"
-                                class="text-red-500 hover:text-red-700 hover:underline"
-                            >
+                                class="text-red-500 hover:underline">
                                 {{ t('vestures.index.delete', 'Dzēst') }}
                             </button>
                         </form>
@@ -98,4 +92,5 @@
             </template>
         </tbody>
     </table>
+
 </div>

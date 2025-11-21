@@ -7,7 +7,6 @@ use App\Models\Tulkojums;
 if (! function_exists('t')) {
     function t($key, $defaultText = null)
     {
-        // $lang = session('language', 'original');
         $lang = app()->getLocale();
 
         $original = Originals::firstOrCreate(
