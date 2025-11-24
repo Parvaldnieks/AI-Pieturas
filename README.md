@@ -10,6 +10,9 @@ Administratora konts:
 E-pasts - admin@example.com
 Parole - password
 
+Lai turpmākās darbības butu sekmīgas ir nepieciešami 2 API (ElevenLabs, OpenAI)
+abi ir par maksu
+
 Lai "sinhronizētu" mp3 failus izmantot pogu, kas pieejama administratora kontam, sākuma skatā un tad termināli izpildīt šo komandu - 
 php artisan queue:work --queue=mp3-generation
 
