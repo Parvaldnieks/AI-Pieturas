@@ -27,8 +27,6 @@
                                     {{ t('pieturas.show.download', 'Lejupielādēt MP3') }}
                                 </a>
                             </div>
-                        @else
-                            <p class="text-gray-500">{{ __('Fails nav atrasts!') }}</p>
                         @endif
                     @endif
                 </div>

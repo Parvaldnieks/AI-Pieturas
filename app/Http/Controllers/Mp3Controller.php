@@ -28,7 +28,7 @@ class Mp3Controller extends Controller
         $vesture = Vesture::findOrFail($id);
 
         if (!$vesture->mp3_path || !Storage::disk('public')->exists($vesture->mp3_path)) {
-            abort(404, 'MP3 file not found.');
+            abort(404, 'MP3 fails netika atrasts.');
         }
                 
         $filePath = Storage::disk('public')->path($vesture->mp3_path);
@@ -82,7 +82,6 @@ class Mp3Controller extends Controller
         
         session(['last_batch' => $batch->id]);
 
-        return back()->with('success', t('dashboard.sync.started', 'Sinhronizācija sākta.') . ' '
-        . t('dashboard.sync.count', 'Sinhronizāciju gaida:') . ' ' . $batch->totalJobs . ' ' . t('dashboard.sync.files', 'faili.'));
+        return back();
     }
 }

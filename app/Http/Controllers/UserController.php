@@ -28,16 +28,8 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:50|unique:users',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:100|unique:users',
             'password' => 'required|string|min:8|max:15',
-        ], [
-            'name.required' => __('Vārds ir nepieciešams!'),
-            'name.max' => __('Vārds nedrīkst pārsniegt 50 rakstzīmes!'),
-            'email.required' => __('E-pasts ir nepieciešams!'),
-            'email.email' => __('E-pasta formāts ir nepareizs!'),
-            'password.required' => __('Parole ir nepieciešama!'),
-            'password.min' => __('Parole nedrīkst būt īsāka par 8 rakstzīmēm!'),
-            'password.max' => __('Parole nedrīkst būt lielāka par 15 rakstzīmēm!'),
         ]);
 
         User::create([
@@ -67,15 +59,8 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:50|unique:users,name,' . $user->id,
-            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'email' => 'required|email|max:100|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|max:15',
-        ], [
-            'name.required' => __('Vārds ir nepieciešams!'),
-            'name.max' => __('Vārds nedrīkst pārsniegt 50 rakstzīmes!'),
-            'email.required' => __('E-pasts ir nepieciešams!'),
-            'email.email' => __('E-pasta formāts ir nepareizs!'),
-            'password.min' => __('Parole nedrīkst būt īsāka par 8 rakstzīmēm!'),
-            'password.max' => __('Parole nedrīkst būt lielāka par 15 rakstzīmēm!'),
         ]);
 
         $user->name = $request->name;

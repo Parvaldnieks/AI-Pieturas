@@ -36,11 +36,9 @@
                 <ul class="space-y-6" x-show="filtered.length > 0">
                     <template x-for="item in filtered" :key="item.id">
                         <li class="border-b border-orange-500">
-                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                            <div class="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between">
                                 <div>
-                                    <p class="font-medium dark:text-white" 
-                                    x-text="item.text">
-                                    </p>
+                                    <p class="font-medium dark:text-white text-center" x-text="item.text"></p>
                                 </div>
 
                                 <template x-if="item.mp3_path">

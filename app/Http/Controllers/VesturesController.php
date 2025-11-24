@@ -49,14 +49,6 @@ class VesturesController extends Controller
             'text' => ['required', 'max:255'],
             'time' => ['required'],
             'file' => ['nullable', 'file', 'mimes:mp3', 'max:20480'],
-        ], [
-            'name.required' => __('Nosaukums ir nepieciešams!'),
-            'name.max' => __('Nosaukums nedrīkst pārsniegt 50 rakstzīmes!'),
-            'text.required' => __('Teksts ir nepieciešams!'),
-            'text.max' => __('Teksts nedrīkst pārsniegt 255 rakstzīmes!'),
-            'time.required' => __('Laiks ir nepieciešams!'),
-            'file.mimes' => __('Faila formāts ir nepareizs!'),
-            'file.max' => __('Fails nedrīkst pārsniegt 20MB!'),
         ]);
 
         $vesture = Vesture::findOrFail($id);

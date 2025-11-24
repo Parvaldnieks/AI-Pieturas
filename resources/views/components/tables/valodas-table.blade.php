@@ -27,9 +27,9 @@
     <table class="w-full dark:text-white text-center mt-4">
         <thead>
             <tr class="border-b border-orange-500">
-                <th>{{ t('valodas.index.name', 'Nosaukums') }}</th>
-                <th>{{ t('valodas.index.code', 'Kods') }}</th>
-                <th>{{ t('valodas.index.actions', 'Darbības') }}</th>
+                <th class="px-4">{{ t('valodas.index.name', 'Nosaukums') }}</th>
+                <th class="px-4">{{ t('valodas.index.code', 'Kods') }}</th>
+                <th class="px-4">{{ t('valodas.index.actions', 'Darbības') }}</th>
             </tr>
         </thead>
 
@@ -45,7 +45,7 @@
             <template x-for="valoda in filtered" :key="valoda.id">
                 <tr class="border-b border-orange-500">
 
-                    <td class="p-2">
+                    <td>
                         <a :href="`/valodas/${valoda.id}/tulkojums`"
                             class="text-blue-500 hover:underline"
                             x-text="valoda.name">
@@ -54,12 +54,12 @@
 
                     <td x-text="valoda.code"></td>
 
-                    <td class="space-x-2">
+                    <td>
                         <template x-if="(total - valoda.translated_count) > 0 && valoda.code !== 'lv'">
                             <form
                                 :action="`/valodas/${valoda.id}/sync`"
                                 method="POST"
-                                class="inline">
+                                class="">
                                 @csrf
 
                                 <button

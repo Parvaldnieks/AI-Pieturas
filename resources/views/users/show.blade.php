@@ -8,7 +8,7 @@
 
         <div class="p-[1px] border border-orange-500 dark:border-none dark:bg-gradient-to-br from-black via-orange-500 to-black rounded-lg shadow-sm mt-4">
             <div class="bg-white dark:bg-black shadow rounded-lg p-4">
-                <div class="dark:text-white">
+                <div class="dark:text-white break-words">
                     <p><strong>{{ t('users.show.id', 'ID:') }}</strong> {{ $user->id }}</p>
                     <p><strong>{{ t('users.show.name', 'Vārds:') }}</strong> {{ $user->name }}</p>
                     <p><strong>{{ t('users.show.email', 'E-pasts:') }}</strong> {{ $user->email }}</p>

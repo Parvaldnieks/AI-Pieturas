@@ -62,10 +62,6 @@
                                 {{ t('vestures.index.show', 'MP3 Fails') }}
                             </a>
                         </template>
-
-                        <template x-if="!vesture.mp3_path">
-                            <span class="text-gray-500">Nav pievienots</span>
-                        </template>
                     </td>
                     
                     <td>
@@ -80,6 +76,7 @@
                         <form :action="`/vestures/${vesture.id}`" method="POST">
                             @csrf
                             @method('DELETE')
+
                             <button
                                 type="submit"
                                 onclick="return confirm( '{{ t('vestures.index.confirm', 'Dzēst šo vēsturi?') }}' )"

@@ -9,32 +9,34 @@ Alpine.data('syncTracker', syncTracker);
 Alpine.start();
 
 document.addEventListener('DOMContentLoaded', function () {
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  const darkIcon = document.getElementById('theme-toggle-dark-icon');
-  const lightIcon = document.getElementById('theme-toggle-light-icon');
+    const themeButtons = document.querySelectorAll('.theme-toggle');
 
-  if (!themeToggleBtn || !darkIcon || !lightIcon) {
-    return;
-  }
+    const darkTheme = localStorage.getItem('theme') === 'dark' ||
+        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-  const isDark = document.documentElement.classList.contains('dark');
+    if (darkTheme) document.documentElement.classList.add('dark');
 
-  if (isDark) {
-    lightIcon.classList.remove('hidden');
-  } else {
-    darkIcon.classList.remove('hidden');
-  }
+    function updateIcons() {
+        themeButtons.forEach(btn => {
+            const darkIcon = btn.querySelector('.theme-toggle-dark-icon');
+            const lightIcon = btn.querySelector('.theme-toggle-light-icon');
+            const isDark = document.documentElement.classList.contains('dark');
 
-  themeToggleBtn.addEventListener('click', function () {
-    darkIcon.classList.toggle('hidden');
-    lightIcon.classList.toggle('hidden');
-
-    document.documentElement.classList.toggle('dark');
-
-    if (document.documentElement.classList.contains('dark')) {
-      localStorage.setItem('theme', 'dark');
-    } else {
-      localStorage.setItem('theme', 'light');
+            darkIcon.classList.toggle('hidden', isDark);
+            lightIcon.classList.toggle('hidden', !isDark);
+        });
     }
-  });
+
+    updateIcons();
+
+    themeButtons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem(
+                'theme',
+                document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+            );
+            updateIcons();
+        });
+    });
 });

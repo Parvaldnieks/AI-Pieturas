@@ -62,19 +62,17 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    <button
-                        id="theme-toggle"
-                        class="mr-2 p-2 rounded-full border border-orange-500 transition ease-in-out duration-150 active:scale-[0.95]"
-                        title="Toggle dark mode"
-                        >
-                        <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden dark:text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-8.66h1M3 12H2m15.36 6.36l.7.7M6.34 6.34l-.7-.7m12.02 0l.7-.7M6.34 17.66l-.7.7M12 8a4 4 0 100 8 4 4 0 000-8z" />
-                        </svg>
+                <button
+                    class="theme-toggle mr-2 p-2 rounded-full border border-orange-500 transition ease-in-out duration-150 active:scale-[0.95]"
+                    title="Toggle dark mode">
+                    <svg class="theme-toggle-light-icon w-5 h-5 hidden dark:text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-8.66h1M3 12H2m15.36 6.36l.7.7M6.34 6.34l-.7-.7m12.02 0l.7-.7M6.34 17.66l-.7.7M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
 
-                        <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
-                        </svg>
-                    </button>
+                    <svg class="theme-toggle-dark-icon w-5 h-5 dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+                    </svg>
+                </button>
 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -110,6 +108,18 @@
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
+                <button
+                    class="theme-toggle mr-2 p-2 rounded-full border border-orange-500 transition ease-in-out duration-150 active:scale-[0.95]"
+                    title="Toggle dark mode">
+                    <svg class="theme-toggle-light-icon w-5 h-5 hidden dark:text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-8.66h1M3 12H2m15.36 6.36l.7.7M6.34 6.34l-.7-.7m12.02 0l.7-.7M6.34 17.66l-.7.7M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+
+                    <svg class="theme-toggle-dark-icon w-5 h-5 dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+                    </svg>
+                </button>
+
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-black dark:text-white hover:border hover:border-orange-500 dark:hover:text-white hover:bg-white dark:hover:bg-black dark:hover:border dark:hover:border-orange-500 focus:outline-none focus:bg-white dark:focus:bg-black dark:focus:text-white transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />

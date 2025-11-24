@@ -40,7 +40,7 @@ class PieturasController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'max:50'],
-            'text' => ['required', 'max:255', 'regex:/^[a-zA-ZāčēģīķļņšūžĀČĒĢĪĶĻŅŠŪŽ\s!?,.]+$/u'],
+            'text' => ['required', 'max:100', 'regex:/^[a-zA-ZāčēģīķļņšūžĀČĒĢĪĶĻŅŠŪŽ\s!?,.]+$/u'],
         ]);
 
         $data['user_id'] = auth()->id();
@@ -60,7 +60,7 @@ class PieturasController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'max:50'],
-            'text' => ['required', 'max:255', 'regex:/^[a-zA-ZāčēģīķļņšūžĀČĒĢĪĶĻŅŠŪŽ\s!?,.]+$/u'],
+            'text' => ['required', 'max:100', 'regex:/^[a-zA-ZāčēģīķļņšūžĀČĒĢĪĶĻŅŠŪŽ\s!?,.]+$/u'],
         ]);
 
         $pietura = Pieturas::findOrFail($id);

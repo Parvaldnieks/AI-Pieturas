@@ -70,9 +70,9 @@
                         }
                     }"
                 >
-                    <div class="bg-white dark:bg-black rounded-lg p-4">
 
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
+                    <div class="bg-white dark:bg-black rounded-lg p-4 sticky top-0 z-20 shadow-md">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                             <input
                                 type="text"
                                 x-model="search"
@@ -110,45 +110,48 @@
                                 </template>
                             </select>
                         </div>
+                    </div>
 
-                        <table class="w-full text-left dark:text-white">
-                            <thead>
-                                <tr class="border-b border-orange-500">
-                                    <th>{{ t('tulkojums.index.key', 'Atslēga') }}</th>
-                                    <th>{{ t('tulkojums.index.original', 'Oriģināls') }}</th>
-                                    <th>{{ t('tulkojums.index.translation', 'Tulkojums') }}</th>
-                                    <th>{{ t('tulkojums.index.actions', 'Darbības') }}</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <template x-if="filtered.length === 0">
-                                    <tr>
-                                        <td colspan="4" class="py-4 text-center text-gray-500 italic">
-                                            {{ t('tulkojums.index.empty', 'Nekas netika atrasts.') }}
-                                        </td>
-                                    </tr>
-                                </template>
-
-                                <template x-for="row in filtered" :key="row.id">
+                        <div class="overflow-x-auto mt-4">
+                            <table class="min-w-full text-left dark:text-white">
+                                <thead>
                                     <tr class="border-b border-orange-500">
-                                        <td class="p-2" x-text="row.key"></td>
-                                        <td x-text="row.original"></td>
-                                        <td x-text="row.translation"></td>
-
-                                        <td>
-                                            <a
-                                                :href="`/valodas/{{ $valoda->id }}/tulkojums/${row.id}/edit`"
-                                                class="text-yellow-500 hover:underline"
-                                            >
-                                                {{ t('tulkojums.index.edit', 'Rediģēt') }}
-                                            </a>
-                                        </td>
+                                        <th>{{ t('tulkojums.index.key', 'Atslēga') }}</th>
+                                        <th>{{ t('tulkojums.index.original', 'Oriģināls') }}</th>
+                                        <th>{{ t('tulkojums.index.translation', 'Tulkojums') }}</th>
+                                        <th>{{ t('tulkojums.index.actions', 'Darbības') }}</th>
                                     </tr>
-                                </template>
-                            </tbody>
-                        </table>
+                                </thead>
 
+                                <tbody>
+                                    <template x-if="filtered.length === 0">
+                                        <tr>
+                                            <td colspan="4" class="py-4 text-center text-gray-500 italic">
+                                                {{ t('tulkojums.index.empty', 'Nekas netika atrasts.') }}
+                                            </td>
+                                        </tr>
+                                    </template>
+
+                                    <template x-for="row in filtered" :key="row.id">
+                                        <tr class="border-b border-orange-500">
+                                            <td class="p-2" x-text="row.key"></td>
+                                            <td x-text="row.original"></td>
+                                            <td x-text="row.translation"></td>
+
+                                            <td>
+                                                <a
+                                                    :href="`/valodas/{{ $valoda->id }}/tulkojums/${row.id}/edit`"
+                                                    class="text-yellow-500 hover:underline"
+                                                >
+                                                    {{ t('tulkojums.index.edit', 'Rediģēt') }}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+
+                        </div>
                     </div>
                 </div>
             </div>

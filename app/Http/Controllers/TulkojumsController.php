@@ -56,7 +56,7 @@ class TulkojumsController extends Controller
     public function update(Request $request, Valodas $valoda, Originals $original)
     {
         $request->validate([
-            'translation' => 'nullable|string'
+            'translation' => 'required|string'
         ]);
 
         Tulkojums::updateOrCreate(

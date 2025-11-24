@@ -28,68 +28,70 @@
             class="rounded focus:border-orange-500 focus:ring-orange-500 mt-4">
     </div>
 
-    <table class="w-full text-center dark:text-white mt-4">
-        <thead>
-            <tr class="border-b border-orange-500">
-                <th>ID</th>
-                <th>{{ t('users.index.name', 'Vārds')}}</th>
-                <th>{{ t('users.index.email', 'E-pasts') }}</th>
-                <th>{{ t('users.index.admin', 'Administrators') }}</th>
-                <th>{{ t('users.index.actions', 'Darbības') }}</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <template x-if="filtered.length === 0">
-                <tr>
-                    <td colspan="5" class="text-gray-500 text-center italic py-4">
-                        {{ t('users.index.empty', 'Nekas netika atrasts.' ) }}
-                    </td>
+    <div class="overflow-x-auto mt-4">
+        <table class="min-w-full text-center dark:text-white">
+            <thead>
+                <tr class="border-b border-orange-500">
+                    <th class="px-4">{{ t('users.index.id', 'ID') }}</th>
+                    <th class="px-4">{{ t('users.index.name', 'Vārds')}}</th>
+                    <th class="px-4">{{ t('users.index.email', 'E-pasts') }}</th>
+                    <th class="px-4">{{ t('users.index.admin', 'Administrators') }}</th>
+                    <th class="px-4">{{ t('users.index.actions', 'Darbības') }}</th>
                 </tr>
-            </template>
+            </thead>
 
-            <template x-for="user in filtered" :key="user.id">
-                <tr class="border-b border-orange-500 h-12">
-                    <td x-text="user.id"></td>
-                    
-                    <td>
-                        <a 
-                            :href="`/users/${user.id}`"
-                            class="text-blue-500 hover:underline"
-                            x-text="user.name"
-                        ></a>
-                    </td>
+            <tbody>
+                <template x-if="filtered.length === 0">
+                    <tr>
+                        <td colspan="5" class="text-gray-500 text-center italic py-4">
+                            {{ t('users.index.empty', 'Nekas netika atrasts.' ) }}
+                        </td>
+                    </tr>
+                </template>
 
-                    <td x-text="user.email"></td>
+                <template x-for="user in filtered" :key="user.id">
+                    <tr class="border-b border-orange-500">
+                        <td x-text="user.id"></td>
+                        
+                        <td>
+                            <a 
+                                :href="`/users/${user.id}`"
+                                class="text-blue-500 hover:underline"
+                                x-text="user.name"
+                            ></a>
+                        </td>
 
-                    <td x-text="user.admin ? yes : no"></td>
+                        <td x-text="user.email"></td>
 
-                    <td>
-                        <a 
-                            :href="`/users/${user.id}/edit`"
-                            class="text-yellow-500 hover:underline mr-2"
-                        >
-                            {{ t('users.index.edit', 'Rediģēt') }}
-                        </a>
+                        <td x-text="user.admin ? yes : no"></td>
 
-                        <form 
-                            :action="`/users/${user.id}`" 
-                            method="POST"
-                            class="inline">
-                            @csrf
-                            @method('DELETE')
+                        <td>
+                            <a 
+                                :href="`/users/${user.id}/edit`"
+                                class="text-yellow-500 hover:underline mr-2"
+                            >
+                                {{ t('users.index.edit', 'Rediģēt') }}
+                            </a>
 
-                            <button 
-                                type="submit" 
-                                onclick="return confirm( '{{ t('users.index.confirm', 'Dzēst šo lietotāju?') }}' )"
-                                class="text-red-500 hover:underline">
-                                {{ t('users.index.delete', 'Dzēst') }}
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            </template>
+                            <form 
+                                :action="`/users/${user.id}`" 
+                                method="POST"
+                                class="inline">
+                                @csrf
+                                @method('DELETE')
 
-        </tbody>
-    </table>
+                                <button 
+                                    type="submit" 
+                                    onclick="return confirm( '{{ t('users.index.confirm', 'Dzēst šo lietotāju?') }}' )"
+                                    class="text-red-500 hover:underline">
+                                    {{ t('users.index.delete', 'Dzēst') }}
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </template>
+
+            </tbody>
+        </table>
+    </div>
 </div>
