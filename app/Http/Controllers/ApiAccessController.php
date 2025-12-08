@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pieturas;
 use App\Models\ApiRequest;
 use Illuminate\Http\Request;
-use App\Http\Resources\PieturaResource;
+use App\Http\Resources\PieturasResource;
 
 class ApiAccessController extends Controller
 {
@@ -135,6 +135,6 @@ class ApiAccessController extends Controller
             return response()->json(['error' => 'No pieturas found'], 404);
         }
 
-        return PieturaResource::collection($pieturas);
+        return PieturasResource::collection($pieturas);
     }
 }
