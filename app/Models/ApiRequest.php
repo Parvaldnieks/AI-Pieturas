@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApiRequest extends Model
 { 
-    protected $fillable = ['device_name', 'requester_email', 'status', 'blocked'];
+    protected $fillable = ['device_type', 'device_os', 'email', 'note', 'status', 'blocked'];
     
     public function apiKey()
     {

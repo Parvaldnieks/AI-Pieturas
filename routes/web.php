@@ -70,6 +70,8 @@ Route::get('valodas/{valoda}/tulkojums/{original}/edit', [TulkojumsController::c
 Route::put('valodas/{valoda}/tulkojums/{original}', [TulkojumsController::class, 'update'])->name('tulkojums.update');
 
 // API
+Route::get('/request-access', [ApiAccessController::class, 'showForm']);
+Route::post('/request-access', [ApiAccessController::class, 'requestAccess'])->name('request.access.submit');
 Route::get('/api-requests', [ApiAccessController::class, 'index'])->name('api.requests')->middleware('permission:parvaldit_api');
 Route::post('/api/delete-key/{id}', [ApiAccessController::class, 'deleteKey'])->middleware(['permission:parvaldit_api'])->name('api.key.delete');
 Route::post('/api/block-device/{id}', [ApiAccessController::class, 'blockDevice'])->middleware(['permission:parvaldit_api'])->name('api.device.block');

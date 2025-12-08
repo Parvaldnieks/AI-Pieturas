@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('api_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('device_name')->nullable();
-            $table->string('requester_email')->nullable();
+            $table->string('device_type');
+            $table->string('device_os');
+            $table->string('email');
+            $table->string('note');
             $table->enum('status', ['pending', 'approved', 'denied'])->default('pending');
             $table->boolean('blocked')->default(false);
             $table->timestamps();
