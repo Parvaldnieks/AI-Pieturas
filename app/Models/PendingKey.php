@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PendingKey extends Model
 {
+    protected $table = 'gaidosas_atslegas';
+
     protected $fillable = ['email', 'api_key', 'copied', 'expires_at'];
 
     protected $dates = ['expires_at'];

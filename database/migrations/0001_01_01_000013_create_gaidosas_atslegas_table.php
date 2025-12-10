@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pending_keys', function (Blueprint $table) {
+        Schema::create('gaidosas_atslegas', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
             $table->string('api_key', 32);
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pending_keys');
+        Schema::dropIfExists('gaidosas_atslegas');
     }
 };

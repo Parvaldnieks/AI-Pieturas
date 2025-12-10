@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('api_requests', function (Blueprint $table) {
+        Schema::create('api_atslegas', function (Blueprint $table) {
             $table->id();
-            $table->string('device_type');
-            $table->string('device_os');
-            $table->string('email');
-            $table->string('note');
-            $table->enum('status', ['pending', 'approved', 'denied'])->default('pending');
-            $table->boolean('blocked')->default(false);
+            $table->foreignId('api_pieprasijums_id')->constrained()->onDelete('cascade');
+            $table->string('key', 32)->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('api_requests');
+        Schema::dropIfExists('api_atslegas');
     }
 };

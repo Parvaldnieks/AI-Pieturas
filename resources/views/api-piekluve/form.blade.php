@@ -152,6 +152,9 @@
             <option value="macOS" {{ old('device_os') == 'macOS' ? 'selected' : '' }}>macOS</option>
             <option value="Android" {{ old('device_os') == 'Android' ? 'selected' : '' }}>Android</option>
             <option value="iOS" {{ old('device_os') == 'iOS' ? 'selected' : '' }}>iOS</option>
+            <option value="ChromeOS" {{ old('device_os') == 'ChromeOS' ? 'selected' : '' }}>ChromeOS</option>
+            <option value="Solaris" {{ old('device_os') == 'Solaris' ? 'selected' : '' }}>Solaris</option>
+            <option value="MS-DOS" {{ old('device_os') == 'MS-DOS' ? 'selected' : '' }}>MS-DOS</option>
             <option value="Other" {{ old('device_os') == 'Other' ? 'selected' : '' }}>Other</option>
         </select>
         @error('device_os')
