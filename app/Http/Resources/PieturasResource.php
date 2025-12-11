@@ -18,7 +18,7 @@ class PieturasResource extends JsonResource
         return [
             'id'      => $this->id,
             'name'    => $this->name,
-            'mp3_url' => $this->latest_mp3_url,
+            'mp3_url' => $this->latest_mp3_url . '?api_key=',
             'text'    => $this->text,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

@@ -86,8 +86,8 @@
 
                         <td class="flex justify-center items-center py-4">
                             <audio
-                                :src="pietura.latest_mp3_path ? `/storage/${pietura.latest_mp3_path}` : ''"
-                                x-show="pietura.latest_mp3_path"
+                                :src="pietura.latest_mp3_url"
+                                x-show="pietura.latest_mp3_url"
                                 controls
                                 preload="none"
                                 class="w-64">

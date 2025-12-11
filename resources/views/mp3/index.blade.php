@@ -43,7 +43,7 @@
 
                                 <template x-if="item.mp3_path">
                                     <audio 
-                                        :src="`/storage/${item.mp3_path}`" 
+                                        :src="item.secure_url"
                                         controls 
                                         preload="none" 
                                         class="w-64 mb-4">

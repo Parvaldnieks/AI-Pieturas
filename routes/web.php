@@ -7,6 +7,7 @@ use App\Http\Controllers\ValodasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VesturesController;
 use App\Http\Controllers\PieturasController;
+use App\Http\Controllers\SecureMp3Controller;
 use App\Http\Controllers\TulkojumsController;
 use App\Http\Controllers\ApiAccessController;
 use App\Http\Controllers\PendingKeyController;
@@ -46,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
 // Mp3
 Route::resource('mp3', Mp3Controller::class)->middleware('permission:skatit_pieturas');
+Route::get('/secure-mp3/{vesture}', [SecureMp3Controller::class, 'stream'])->name('secure.mp3');
 Route::get('/download/{id}', [Mp3Controller::class, 'download'])->name('mp3.download');
 Route::post('/mp3/sync', [Mp3Controller::class, 'start'])->name('mp3.sync');
 

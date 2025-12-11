@@ -36,7 +36,7 @@
                             <div>
                                 <p>{{ t('vestures.edit.current', 'Pašreizējais fails:') }}</p>
                                 <audio controls class="w-full">
-                                    <source src="{{ asset('storage/'.$vesture->mp3_path) }}" type="audio/mpeg">
+                                    <source src="{{ $vesture->pietura->latest_mp3_url }}" type="audio/mpeg">
                                     Jūsu pārlūkprogramma neatbalsta audio atskaņošanu.
                                 </audio>
                             </div>

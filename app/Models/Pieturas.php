@@ -63,13 +63,6 @@ class Pieturas extends Model
         });
     }
 
-    public function getLatestMp3UrlAttribute()
-    {
-        return $this->latest_mp3_path
-            ? Storage::disk('public')->url($this->latest_mp3_path)
-            : null;
-    }
-
     public function getLatestMp3PathAttribute()
     {
         $latest = $this->vestures()
@@ -78,5 +71,19 @@ class Pieturas extends Model
             ->first();
 
         return $latest?->mp3_path;
+    }
+
+    public function getLatestMp3UrlAttribute()
+    {
+        $latest = $this->vestures()
+            ->whereNotNull('mp3_path')
+            ->orderByDesc('time')
+            ->first();
+
+        if (!$latest) {
+            return null;
+        }
+
+        return url("/secure-mp3/{$latest->id}");
     }
 }
